@@ -1,0 +1,408 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap");
+
+/* =====================================
+   1. الإعدادات العامة
+===================================== */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: "Space Grotesk", sans-serif;
+  background: #dce5d7;
+  transition: background 0.7s ease;
+}
+
+.container {
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  padding: 24px;
+}
+
+/* =====================================
+   2. التصميم الأساسي للبطاقة
+===================================== */
+
+.card {
+  /* ألوان الحالة السعيدة */
+  --page-bg: #dce5d7;
+  --paper: #f3ebdd;
+  --ink: #244d4d;
+  --accent: #244d4d;
+  --muted: #58716a;
+  --line: #c8d3bd;
+  --decoration: rgba(36, 77, 77, 0.09);
+  --circle: rgba(36, 77, 77, 0.24);
+
+  width: min(1100px, 100%);
+  height: min(650px, calc(100svh - 48px));
+  min-height: 0;
+
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+
+  background: var(--paper);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 3px;
+
+  box-shadow: 0 25px 65px rgba(36, 77, 77, 0.13);
+
+  transition:
+    background 0.7s ease,
+    color 0.7s ease,
+    border-color 0.7s ease,
+    box-shadow 0.7s ease;
+}
+
+/* =====================================
+   3. ألوان الحالات المختلفة
+===================================== */
+
+/* الحالة السعيدة */
+
+.card.is-happy {
+  --page-bg: #dce5d7;
+  --paper: #f3ebdd;
+  --ink: #244d4d;
+  --accent: #244d4d;
+  --muted: #58716a;
+  --line: #c8d3bd;
+  --decoration: rgba(36, 77, 77, 0.09);
+  --circle: rgba(36, 77, 77, 0.24);
+}
+
+/* حالة الفضول */
+
+.card.is-curious {
+  --page-bg: #101d38;
+  --paper: #e8f7ff;
+  --ink: #102e59;
+  --accent: #145bd7;
+  --muted: #41627f;
+  --line: #b9d9eb;
+  --decoration: rgba(20, 91, 215, 0.12);
+  --circle: rgba(16, 46, 89, 0.25);
+}
+
+/* حالة النعاس */
+
+.card.is-sleepy {
+  --page-bg: #20172e;
+  --paper: #f1e8f4;
+  --ink: #3d254d;
+  --accent: #a94d83;
+  --muted: #745b79;
+  --line: #d8c3da;
+  --decoration: rgba(169, 77, 131, 0.12);
+  --circle: rgba(61, 37, 77, 0.22);
+}
+
+/* =====================================
+   4. تغيير خلفية الصفحة حسب الحالة
+===================================== */
+
+body:has(.card.is-happy) {
+  background: #dce5d7;
+}
+
+body:has(.card.is-curious) {
+  background: #101d38;
+}
+
+body:has(.card.is-sleepy) {
+  background: #20172e;
+}
+
+/* =====================================
+   5. الزخارف الخلفية
+===================================== */
+
+.card::before {
+  content: "BYTE";
+
+  position: absolute;
+  z-index: -1;
+  bottom: -80px;
+  right: -20px;
+
+  font-size: clamp(180px, 30vw, 360px);
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.12em;
+
+  color: var(--decoration);
+  pointer-events: none;
+
+  transition: color 0.7s ease;
+}
+
+.card::after {
+  content: "";
+
+  position: absolute;
+  z-index: -1;
+
+  width: 490px;
+  height: 490px;
+  right: 5%;
+  top: 50%;
+  transform: translateY(-50%);
+
+  border: 1px solid var(--circle);
+  border-radius: 50%;
+
+  box-shadow:
+    0 0 0 25px var(--decoration),
+    0 0 0 55px var(--decoration);
+
+  pointer-events: none;
+
+  transition:
+    border-color 0.7s ease,
+    box-shadow 0.7s ease;
+}
+
+/* =====================================
+   6. صورة الروبوت
+===================================== */
+
+.robot-image {
+  position: absolute;
+  z-index: 1;
+
+  width: 54%;
+  max-width: 590px;
+  max-height: 90%;
+  height: auto;
+
+  object-fit: contain;
+
+  right: 1%;
+  top: 50%;
+
+  filter: drop-shadow(0 25px 22px rgba(32, 43, 61, 0.15));
+
+  animation: byteFloat 4s ease-in-out infinite;
+}
+
+@keyframes byteFloat {
+  0%,
+  100% {
+    transform: translateY(-50%) rotate(-2deg);
+  }
+
+  50% {
+    transform: translateY(calc(-50% - 15px)) rotate(2deg);
+  }
+}
+
+/* =====================================
+   7. عنوان الروبوت
+===================================== */
+
+h1 {
+  position: absolute;
+  z-index: 2;
+
+  top: 17%;
+  left: 8%;
+  width: 48%;
+
+  font-size: clamp(55px, 7vw, 94px);
+  line-height: 0.94;
+  letter-spacing: -0.085em;
+  font-weight: 700;
+
+  color: var(--ink);
+  overflow-wrap: break-word;
+
+  transition: color 0.7s ease;
+}
+
+/* =====================================
+   8. رسالة الروبوت
+===================================== */
+
+p {
+  position: absolute;
+  z-index: 2;
+
+  top: 51%;
+  left: 8%;
+  width: 35%;
+  max-width: 380px;
+
+  font-size: 17px;
+  line-height: 1.85;
+  font-weight: 500;
+
+  color: var(--muted);
+  white-space: pre-line;
+
+  transition: color 0.7s ease;
+}
+
+/* =====================================
+   9. زر تغيير الحالة
+===================================== */
+
+button {
+  position: absolute;
+  z-index: 3;
+
+  left: 8%;
+  bottom: 14%;
+
+  padding: 18px 26px;
+
+  border: none;
+  border-radius: 2px;
+
+  background: var(--accent);
+  color: #ffffff;
+
+  font-family: "Space Mono", monospace;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+
+  cursor: pointer;
+
+  transition:
+    background 0.7s ease,
+    transform 0.25s ease;
+}
+
+button:hover {
+  transform: translateY(-4px);
+}
+
+button:focus-visible {
+  outline: 3px solid var(--ink);
+  outline-offset: 5px;
+}
+
+/* =====================================
+   10. تفاصيل الحالة
+===================================== */
+
+#details {
+  position: absolute;
+  z-index: 3;
+
+  top: 35px;
+  left: 8%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 14px;
+
+  border: 1px solid var(--line);
+  border-radius: 3px;
+
+  background: rgba(255, 255, 255, 0.35);
+
+  font-family: "Space Mono", monospace;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+
+  color: var(--muted);
+
+  transition:
+    color 0.7s ease,
+    background 0.7s ease,
+    border-color 0.7s ease;
+}
+
+/* النقطة المضيئة بجانب التفاصيل */
+#details::before {
+  content: "";
+
+  width: 7px;
+  height: 7px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  background: var(--accent);
+
+  box-shadow: 0 0 10px var(--accent);
+}
+
+/* =====================================
+   11. تنسيق الشاشات الصغيرة
+===================================== */
+
+@media (max-width: 760px) {
+  .container {
+    padding: 12px;
+  }
+
+  .card {
+    height: auto;
+    min-height: 760px;
+  }
+
+  .card::after {
+    width: 320px;
+    height: 320px;
+    top: 38%;
+    right: 50%;
+    transform: translate(50%, -50%);
+  }
+
+  .robot-image {
+    width: 85%;
+    max-width: 380px;
+    max-height: none;
+
+    right: 7%;
+    top: 36%;
+  }
+
+  h1 {
+    top: 65px;
+    left: 7%;
+    width: 86%;
+    font-size: clamp(48px, 12vw, 72px);
+  }
+
+  p {
+    top: auto;
+    bottom: 185px;
+    left: 8%;
+    width: 84%;
+    font-size: 15px;
+  }
+
+  button {
+    left: 8%;
+    bottom: 85px;
+  }
+
+  #details {
+    top: 25px;
+    left: 8%;
+  }
+
+  .card::before {
+    font-size: 180px;
+    bottom: 0;
+  }
+}

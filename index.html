@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meet Byte | Interactive Card</title>
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <!-- الحاوية الرئيسية -->
+    <div class="container">
+      <!-- بطاقة الروبوت -->
+      <div class="card is-happy">
+        <!-- صورة Byte -->
+        <img
+          src="images/byte-happy.png"
+          alt="Byte the Robot"
+          id="robotImage"
+          class="robot-image"
+        />
+
+        <!-- عنوان البطاقة -->
+        <h1 id="robotTitle">Hello, Human!</h1>
+
+        <!-- رسالة الروبوت -->
+        <p id="message">
+          I'm Byte, your little digital companion. Ready to explore?
+        </p>
+
+        <!-- زر تغيير حالة الروبوت -->
+        <button id="changeMoodBtn">Change Byte's Mood</button>
+
+        <!-- تفاصيل إضافية -->
+        <div id="details"></div>
+      </div>
+    </div>
+  </body>
+</html>
